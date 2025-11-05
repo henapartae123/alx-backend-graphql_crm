@@ -2,6 +2,13 @@ import datetime
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 
+def log_crm_heartbeat():
+    """Logs a heartbeat entry with timestamp to /tmp/crm_heartbeat_log.txt."""
+    HEARTBEAT_LOG = "/tmp/crm_heartbeat_log.txt"
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(HEARTBEAT_LOG, "a") as f:
+        f.write(f"{now} - CRM heartbeat\n")
+
 def update_low_stock():
     log_path = "/tmp/low_stock_updates_log.txt"
     timestamp = datetime.datetime.now().strftime("%d/%m/%Y-%H:%M:%S")
